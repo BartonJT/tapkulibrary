@@ -230,8 +230,11 @@
 		NSArray *files = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[self cacheDirectoryPath] error:&error];
 		
 		
-		for( NSString *file in files ) {
-			if( file != @"." && file != @".." ) {
+		for( NSString *file in files )
+        {
+			if( ![file isEqualToString:@"."] &&
+                ![file isEqualToString:@".."] )
+            {
 				NSString *path = [[self cacheDirectoryPath] stringByAppendingPathComponent:file];
 				[[NSFileManager defaultManager] removeItemAtPath:path error:&error];
 				
@@ -254,8 +257,11 @@
 		NSError* error = nil;
 		NSArray *files = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:path error:&error];
 		
-		for( NSString *file in files ) {
-			if( file != @"." && file != @".." ) {
+		for( NSString *file in files )
+        {
+			if( ![file isEqualToString:@"."] &&
+                ![file isEqualToString:@".."] )
+            {
 				
 				NSString *path = [path stringByAppendingPathComponent:file];
 				NSDate *created = [[[NSFileManager defaultManager] attributesOfItemAtPath:path error:NULL] fileCreationDate];

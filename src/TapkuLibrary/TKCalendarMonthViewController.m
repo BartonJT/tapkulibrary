@@ -31,48 +31,130 @@
 #import "TKCalendarMonthViewController.h"
 
 
-@interface TKCalendarMonthViewController () {
+@interface TKCalendarMonthViewController ()
+{
 	BOOL _sundayFirst;
 }
 
+
 @end
 
-@implementation TKCalendarMonthViewController
-@synthesize monthView = _monthView;
 
-- (id) init{
+@implementation TKCalendarMonthViewController
+
+@synthesize monthView  = _monthView;
+
+@synthesize delegate   = _delegate;
+@synthesize dataSource = _dataSource;
+
+@synthesize cancelButton = _cancelButton;
+
+
+
+#pragma mark - Initialisation -
+
+- (id) init
+{
 	return [self initWithSunday:YES];
 }
-- (id) initWithSunday:(BOOL)sundayFirst{
-	if(!(self = [super init])) return nil;
+
+
+- (id) initWithSunday:(BOOL)sundayFirst
+{
+	if (!(self = [super init]))
+    {
+        return nil;
+    }
+    
+    _delegate = nil;
+    _dataSource = nil;
+    
+    _cancelButton = nil;
+    
 	_sundayFirst = sundayFirst;
+    
 	return self;
 }
 
-- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+
+
+#pragma mark - View Lifecycle -
+
+- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
 	return NO;
 }
 
-- (void) viewDidUnload {
+
+- (void) viewDidUnload
+{
+    self.navigationItem.leftBarButtonItem = nil;
+    
 	self.monthView = nil;
+    
+    [self setCancelButton:nil];
 }
 
 
-- (void) loadView{
+- (void) loadView
+{
 	[super loadView];
+    
+    [self setTitle:@"Pick Date"];
 	
 	_monthView = [[TKCalendarMonthView alloc] initWithSundayAsFirst:_sundayFirst];
-	_monthView.delegate = self;
-	_monthView.dataSource = self;
+    
+    
+    if (!_delegate)
+    {
+        _monthView.delegate = self;
+    }
+    else
+    {
+        //_monthView.delegate = _delegate;
+    }
+    
+    if (!_dataSource)
+    {
+        _monthView.dataSource = self;
+    }
+    else
+    {
+        _monthView.dataSource = _dataSource;
+    }
+    
+    _cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+                                                                  target:self
+                                                                  action:@selector(dismissTKCalendarMonthViewController)];
+    
+    self.navigationItem.leftBarButtonItem = self.cancelButton;
+    
+    
 	[self.view addSubview:_monthView];
 	[_monthView reload];
-	
 }
 
 
-- (NSArray*) calendarMonthView:(TKCalendarMonthView*)monthView marksFromDate:(NSDate*)startDate toDate:(NSDate*)lastDate{
+
+#pragma mark - Object Methods -
+
+- (NSArray*) calendarMonthView:(TKCalendarMonthView*)monthView
+                 marksFromDate:(NSDate*)startDate
+                        toDate:(NSDate*)lastDate
+{
 	return nil;
 }
 
 
+- (void) dismissTKCalendarMonthViewController
+{
+    if (self.delegate &&
+        [self.delegate respondsToSelector:@selector(dismissTKCalendarMonthViewController:)])
+    {
+        [self.delegate dismissTKCalendarMonthViewController:self];
+    }
+}
+
+
 @end
+

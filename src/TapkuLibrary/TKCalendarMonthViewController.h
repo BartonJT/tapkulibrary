@@ -33,10 +33,18 @@
 #import "TKCalendarMonthView.h"
 
 @class TKCalendarMonthView;
-@protocol TKCalendarMonthViewDelegate,TKCalendarMonthViewDataSource;
+@protocol TKCalendarMonthViewControllerDelegate;
 
 /** The `TKCalendarMonthViewController` class creates a controller object that manages a calendar month grid. */
-@interface TKCalendarMonthViewController : UIViewController <TKCalendarMonthViewDelegate,TKCalendarMonthViewDataSource>
+@interface TKCalendarMonthViewController : UIViewController <TKCalendarMonthViewDelegate, TKCalendarMonthViewDataSource>
+{
+    TKCalendarMonthView *_monthView;
+    
+    __weak id<TKCalendarMonthViewControllerDelegate>   _delegate;
+    __weak id<TKCalendarMonthViewDataSource>           _dataSource;
+    
+    UIBarButtonItem *_cancelButton;
+}
 
 /** Initializes a month view controller to manage a month grid. Sunday will be the left-most day.
  @return A newly create month view controller.
@@ -49,9 +57,25 @@
  */
 - (id) initWithSunday:(BOOL)sundayFirst;
 
+- (void) dismissTKCalendarMonthViewController;
+
 
 /** Returns the month view managed by the controller object. */
 @property (strong,nonatomic) TKCalendarMonthView *monthView;
+
+@property (weak, nonatomic) id<TKCalendarMonthViewControllerDelegate>   delegate;
+@property (weak, nonatomic) id<TKCalendarMonthViewDataSource>           dataSource;
+
+@property (strong, nonatomic) UIBarButtonItem *cancelButton;
+
+
+@end
+
+
+@protocol TKCalendarMonthViewControllerDelegate <NSObject>
+
+
+- (void) dismissTKCalendarMonthViewController:(TKCalendarMonthViewController *)aTKCalendarMonthViewController;
 
 
 @end

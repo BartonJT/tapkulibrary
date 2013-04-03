@@ -82,7 +82,27 @@
 
 - (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-	return NO;
+    if (interfaceOrientation == UIInterfaceOrientationPortrait)
+    {
+        return YES;
+    }
+    else if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+    {
+        return YES;
+    }
+    
+    return NO;
+}
+
+
+- (NSUInteger) supportedInterfaceOrientations
+{
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+    {
+        return UIInterfaceOrientationMaskAll;
+    }
+    
+    return UIInterfaceOrientationMaskPortrait;
 }
 
 

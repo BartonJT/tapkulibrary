@@ -61,7 +61,7 @@
 
 
 /** Returns the month view managed by the controller object. */
-@property (strong,nonatomic) TKCalendarMonthView *monthView;
+@property (strong, nonatomic) TKCalendarMonthView *monthView;
 
 @property (weak, nonatomic) id<TKCalendarMonthViewControllerDelegate>   delegate;
 @property (weak, nonatomic) id<TKCalendarMonthViewDataSource>           dataSource;

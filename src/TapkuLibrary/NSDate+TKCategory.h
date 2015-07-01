@@ -35,15 +35,15 @@
 
 
 struct TKDateInformation {
-	int day;
-	int month;
-	int year;
+	NSInteger day;
+	NSInteger month;
+	NSInteger year;
 	
-	int weekday;
+	NSInteger weekday;
 	
-	int minute;
-	int hour;
-	int second;
+	NSInteger minute;
+	NSInteger hour;
+	NSInteger second;
 	
 };
 typedef struct TKDateInformation TKDateInformation;
@@ -67,7 +67,7 @@ typedef struct TKDateInformation TKDateInformation;
 
 
 - (BOOL) isSameDay:(NSDate*)anotherDate;
-- (int) monthsBetweenDate:(NSDate *)toDate;
+- (NSInteger) monthsBetweenDate:(NSDate *)toDate;
 - (NSInteger) daysBetweenDate:(NSDate*)date;
 
 /** Returns a Boolean value that indicates whether the date object is that same date information as the current day. 

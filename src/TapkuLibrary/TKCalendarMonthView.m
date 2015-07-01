@@ -42,14 +42,14 @@
 	id target;
 	SEL action;
 	
-	int firstOfPrev,lastOfPrev;
+	NSInteger firstOfPrev,lastOfPrev;
 	NSArray *marks;
-	int today;
+	NSInteger today;
 	BOOL markWasOnToday;
 	
-	int selectedDay,selectedPortion;
+	NSInteger selectedDay,selectedPortion;
 	
-	int firstWeekday, daysInMonth;
+	NSInteger firstWeekday, daysInMonth;
 
 
 	BOOL startOnSunday;
@@ -154,7 +154,7 @@
 		
 		TKDateInformation info2 = [previousMonth dateInformationWithTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
 		
-		int preDayCnt = [previousMonth daysBetweenDate:currentMonth];		
+		int preDayCnt = (int)[previousMonth daysBetweenDate:currentMonth];
 		info2.day = preDayCnt - info.weekday + 2;
 		firstDate = [NSDate dateFromDateInformation:info2 timeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
 		
@@ -162,7 +162,7 @@
 	}else if(!sunday && info.weekday != 2){
 		
 		TKDateInformation info2 = [previousMonth dateInformationWithTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
-		int preDayCnt = [previousMonth daysBetweenDate:currentMonth];
+		int preDayCnt = (int)[previousMonth daysBetweenDate:currentMonth];
 		if(info.weekday==1){
 			info2.day = preDayCnt - 5;
 		}else{
@@ -178,7 +178,7 @@
 	
 	
 	
-	int daysInMonth = [currentMonth daysBetweenDate:nextMonth];		
+	int daysInMonth = (int)[currentMonth daysBetweenDate:nextMonth];
 	info.day = daysInMonth;
 	NSDate *lastInMonth = [NSDate dateFromDateInformation:info timeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
 	TKDateInformation lastDateInfo = [lastInMonth dateInformationWithTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
@@ -227,7 +227,7 @@
 	
 	
 	NSDate *prev = [_monthDate previousMonth];
-	daysInMonth = [[_monthDate nextMonth] daysBetweenDate:_monthDate];
+	daysInMonth = (int)[[_monthDate nextMonth] daysBetweenDate:_monthDate];
 	
 	
 	NSArray *dates = [TKCalendarMonthTiles rangeOfDatesInMonthGrid:date startOnSunday:sunday];
@@ -240,7 +240,7 @@
 	TKDateInformation todayInfo = [[NSDate date] dateInformation];
 	today = dateInfo.month == todayInfo.month && dateInfo.year == todayInfo.year ? todayInfo.day : -5;
 	
-	int preDayCnt = [prev daysBetweenDate:_monthDate];
+	int preDayCnt = (int)[prev daysBetweenDate:_monthDate];
 	if(firstWeekday>1 && sunday){
 		firstOfPrev = preDayCnt - firstWeekday+2;
 		lastOfPrev = preDayCnt;
@@ -285,8 +285,8 @@
 	r.size.height -= 2;
 	[str drawInRect: r
 		   withFont: f1
-	  lineBreakMode: UILineBreakModeWordWrap 
-		  alignment: UITextAlignmentCenter];
+	  lineBreakMode: NSLineBreakByWordWrapping
+		  alignment: NSTextAlignmentCenter];
 	
 	if(mark){
 		r.size.height = 10;
@@ -294,8 +294,8 @@
 		
 		[@"•" drawInRect: r
 				withFont: f2
-		   lineBreakMode: UILineBreakModeWordWrap 
-			   alignment: UITextAlignmentCenter];
+		   lineBreakMode: NSLineBreakByWordWrapping
+			   alignment: NSTextAlignmentCenter];
 	}
 	
 
@@ -447,12 +447,12 @@
 	CGPoint p = [touch locationInView:self];
 	if(p.y > self.bounds.size.height || p.y < 0) return;
 	
-	int column = p.x / 46, row = p.y / 44;
-	int day = 1, portion = 0;
+	NSInteger column = p.x / 46, row = p.y / 44;
+	NSInteger day = 1, portion = 0;
 	
 	if(row == (int) (self.bounds.size.height / 44)) row --;
 	
-	int fir = firstWeekday - 1;
+	NSInteger fir = firstWeekday - 1;
 	if(!startOnSunday && fir == 0) fir = 7;
 	if(!startOnSunday) fir--;
 	
@@ -492,7 +492,7 @@
 	}
 	
 	[self addSubview:self.selectedImageView];
-	self.currentDay.text = [NSString stringWithFormat:@"%d",day];
+	self.currentDay.text = [NSString stringWithFormat:@"%ld",(long)day];
 	
 	if ([marks count] > 0) {
 		if([[marks objectAtIndex: row * 7 + column] boolValue])
@@ -518,10 +518,10 @@
 	if(portion == 1){
 		selectedDay = day;
 		selectedPortion = portion;
-		[target performSelector:action withObject:[NSArray arrayWithObject:[NSNumber numberWithInt:day]]];
+		[target performSelector:action withObject:[NSArray arrayWithObject:[NSNumber numberWithInteger:day]]];
 		
 	}else if(down){
-		[target performSelector:action withObject:[NSArray arrayWithObjects:[NSNumber numberWithInt:day],[NSNumber numberWithInt:portion],nil]];
+		[target performSelector:action withObject:[NSArray arrayWithObjects:[NSNumber numberWithInteger:day],[NSNumber numberWithInteger:portion],nil]];
 		selectedDay = day;
 		selectedPortion = portion;
 	}
@@ -547,7 +547,7 @@
 		_currentDay.textColor = [UIColor whiteColor];
 		_currentDay.backgroundColor = [UIColor clearColor];
 		_currentDay.font = [UIFont boldSystemFontOfSize:dateFontSize];
-		_currentDay.textAlignment = UITextAlignmentCenter;
+		_currentDay.textAlignment = NSTextAlignmentCenter;
 		_currentDay.shadowColor = [UIColor darkGrayColor];
 		_currentDay.shadowOffset = CGSizeMake(0, -1);
 	}
@@ -563,7 +563,7 @@
 		_dot.textColor = [UIColor whiteColor];
 		_dot.backgroundColor = [UIColor clearColor];
 		_dot.font = [UIFont boldSystemFontOfSize:dotFontSize];
-		_dot.textAlignment = UITextAlignmentCenter;
+		_dot.textAlignment = NSTextAlignmentCenter;
 		_dot.shadowColor = [UIColor darkGrayColor];
 		_dot.shadowOffset = CGSizeMake(0, -1);
 	}
@@ -692,7 +692,7 @@
         }
         
 		label.text = s;
-		label.textAlignment = UITextAlignmentCenter;
+		label.textAlignment = NSTextAlignmentCenter;
 		label.shadowColor = [UIColor whiteColor];
 		label.shadowOffset = CGSizeMake(0, 1);
 		label.font = [UIFont systemFontOfSize:11];
@@ -935,7 +935,7 @@
 - (UILabel *) monthYear{
 	if(_monthYear==nil){
 		_monthYear = [[UILabel alloc] initWithFrame:CGRectInset(CGRectMake(0, 0, self.tileBox.frame.size.width, 38), 40, 6)];
-		_monthYear.textAlignment = UITextAlignmentCenter;
+		_monthYear.textAlignment = NSTextAlignmentCenter;
 		_monthYear.backgroundColor = [UIColor clearColor];
 		_monthYear.font = [UIFont boldSystemFontOfSize:22];
 		_monthYear.textColor = [UIColor colorWithRed:59/255. green:73/255. blue:88/255. alpha:1];

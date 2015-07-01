@@ -112,7 +112,7 @@
  @param index The index of the cover that will become the foremost cover.
  @param animated Boolean flag to animate the change.
  */
-- (void) bringCoverAtIndexToFront:(int)index animated:(BOOL)animated;
+- (void) bringCoverAtIndexToFront:(NSInteger)index animated:(BOOL)animated;
 
 /** The index of the foremost cover */
 @property (nonatomic, assign) NSInteger currentIndex;
@@ -128,14 +128,14 @@
  @param coverflowView The coverflow view.
  @param index The index of the foremost cover.
  */
-- (void) coverflowView:(TKCoverflowView*)coverflowView coverAtIndexWasBroughtToFront:(int)index;
+- (void) coverflowView:(TKCoverflowView*)coverflowView coverAtIndexWasBroughtToFront:(NSInteger)index;
 @optional
 /** Tells the delegate that a specified cover was tapped.
  @param coverflowView The coverflow view.
  @param index The index of the double tapped cover.
  @param tapCount The number of times the front cover was tapped.
  */
-- (void) coverflowView:(TKCoverflowView*)coverflowView coverAtIndexWasTappedInFront:(int)index tapCount:(NSInteger)tapCount;
+- (void) coverflowView:(TKCoverflowView*)coverflowView coverAtIndexWasTappedInFront:(NSInteger)index tapCount:(NSInteger)tapCount;
 @end
 
 /** The data source of a `TKCoverflowView` object must adopt the `TKCoverflowViewDataSource` protocol. */ 

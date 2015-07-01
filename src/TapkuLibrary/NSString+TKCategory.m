@@ -69,7 +69,7 @@
 	NSMutableString *s = [NSMutableString string];
 	
 	int start = 0;
-	int len = [self length];
+	int len = (int)[self length];
 	NSCharacterSet *chs = [NSCharacterSet characterSetWithCharactersInString:@"<>&\""];
 	
 	while (start < len) {
@@ -101,7 +101,7 @@
 				break;
 		}
 		
-		start = r.location + 1;
+		start = (int)r.location + 1;
 	}
 	
 	return s;
@@ -167,7 +167,7 @@
 
 - (NSString *) md5sum{
 	unsigned char digest[CC_MD5_DIGEST_LENGTH], i;
-	CC_MD5([self UTF8String], [self lengthOfBytesUsingEncoding:NSUTF8StringEncoding], digest);
+	CC_MD5([self UTF8String], (unsigned int)[self lengthOfBytesUsingEncoding:NSUTF8StringEncoding], digest);
 	NSMutableString *ms = [NSMutableString string];
 	for (i=0;i<CC_MD5_DIGEST_LENGTH;i++) {
 		[ms appendFormat: @"%02x", (int)(digest[i])];

@@ -112,7 +112,7 @@ CGPoint midpointBetweenPoints(CGPoint a, CGPoint b);
 			tapCounts[0] = 0;
 			tapCounts[1] = 0;
             for (UITouch *touch in touches) {
-                tapCounts[i]    = [touch tapCount];
+                tapCounts[i]    = (int)[touch tapCount];
                 tapLocations[i] = [touch locationInView:self];
                 i++;
             }

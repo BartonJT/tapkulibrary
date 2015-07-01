@@ -121,7 +121,7 @@
     _titleLabel.backgroundColor = [UIColor clearColor];
     _titleLabel.font = [UIFont boldSystemFontOfSize:18];
     _titleLabel.textColor = [UIColor colorWithRed:128/255. green:136/255. blue:149/255. alpha:1];
-    _titleLabel.textAlignment = UITextAlignmentCenter;
+    _titleLabel.textAlignment = NSTextAlignmentCenter;
     _titleLabel.shadowColor = [UIColor whiteColor];
     _titleLabel.shadowOffset = CGSizeMake(0, 1);
     
@@ -131,7 +131,7 @@
     _subtitleLabel.backgroundColor = [UIColor clearColor];
     _subtitleLabel.font = [UIFont systemFontOfSize:14];
     _subtitleLabel.textColor = [UIColor colorWithRed:128/255. green:136/255. blue:149/255. alpha:1];
-    _subtitleLabel.textAlignment = UITextAlignmentCenter;
+    _subtitleLabel.textAlignment = NSTextAlignmentCenter;
     _subtitleLabel.shadowColor = [UIColor whiteColor];
     _subtitleLabel.shadowOffset = CGSizeMake(0, 1);
     

@@ -85,9 +85,6 @@
 	
 	return self;
 }
-- (void) dealloc{
-	dispatch_release(cache_queue);
-}
 
 
 
@@ -177,7 +174,7 @@
 		if(cacheImage==nil) return;
 		
 		[self setObject:cacheImage forKey:request.key];
-		NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:key,@"key",cacheImage,@"image",[NSNumber numberWithUnsignedInt:request.tag],@"tag",nil];
+		NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:key,@"key",cacheImage,@"image",[NSNumber numberWithUnsignedInt:(unsigned int)request.tag],@"tag",nil];
 		
 		dispatch_async(dispatch_get_main_queue(), ^{
 			[_diskKeys setObject:[NSNull null] forKey:request.key];
@@ -322,7 +319,7 @@
 		
 		if(cacheImage==nil) return;
 		[self setObject:cacheImage forKey:key];
-		NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:key,@"key",cacheImage,@"image",[NSNumber numberWithUnsignedInt:tag],@"tag",nil];
+		NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:key,@"key",cacheImage,@"image",[NSNumber numberWithUnsignedInt:(unsigned int)tag],@"tag",nil];
 		
 		
 		dispatch_async(dispatch_get_main_queue(), ^{

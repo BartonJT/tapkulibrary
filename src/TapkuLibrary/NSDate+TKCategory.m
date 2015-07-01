@@ -51,10 +51,10 @@
 }
 
 
-- (int) weekday{
+- (NSInteger) weekday{
 	NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
 	NSDateComponents *comps = [gregorian components:(NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit | NSWeekdayCalendarUnit) fromDate:self];
-	int weekday = [comps weekday];
+	NSInteger weekday = [comps weekday];
 	return weekday;
 }
 - (NSDate*) timelessDate {
@@ -79,7 +79,7 @@
 	return ([components1 year] == [components2 year] && [components1 month] == [components2 month] && [components1 day] == [components2 day]);
 } 
 
-- (int) monthsBetweenDate:(NSDate *)toDate{
+- (NSInteger) monthsBetweenDate:(NSDate *)toDate{
     NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     
     NSDateComponents *components = [gregorian components:NSMonthCalendarUnit
@@ -87,12 +87,12 @@
                                                   toDate:[toDate monthlessDate]
                                                  options:0];
     NSInteger months = [components month];
-    return abs(months);
+    return labs(months);
 }
 
 - (NSInteger) daysBetweenDate:(NSDate*)date {
     NSTimeInterval time = [self timeIntervalSinceDate:date];
-    return ((abs(time) / (60.0 * 60.0 * 24.0)) + 0.5);
+    return ((fabs(time) / (60.0 * 60.0 * 24.0)) + 0.5);
 }
 
 - (BOOL) isToday{
@@ -219,7 +219,8 @@
 }
 
 + (NSString*) dateInformationDescriptionWithInformation:(TKDateInformation)info{
-	return [NSString stringWithFormat:@"%d %d %d %d:%d:%d",info.month,info.day,info.year,info.hour,info.minute,info.second];
+	return [NSString stringWithFormat:@"%ld %ld %ld %ld:%ld:%ld",
+				(long)info.month,(long)info.day,(long)info.year,(long)info.hour,(long)info.minute,(long)info.second];
 }
 
 @end

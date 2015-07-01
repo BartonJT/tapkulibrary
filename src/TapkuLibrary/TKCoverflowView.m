@@ -44,7 +44,7 @@
 #pragma mark -
 @interface TKCoverflowView (hidden)
 
-- (void) animateToIndex:(int)index animated:(BOOL)animated;
+- (void) animateToIndex:(NSInteger)index animated:(BOOL)animated;
 - (void) _load;
 - (void) _setup;
 - (void) newrange;
@@ -137,7 +137,7 @@
 
 
 	[self newrange];
-	[self animateToIndex:currentIndex animated:NO];
+	[self animateToIndex:(int)currentIndex animated:NO];
 	
 	
 	boundSize = self.frame.size;
@@ -179,7 +179,7 @@
 	
 	if([coverViews objectAtIndex:index] == [NSNull null]){
 		
-		TKCoverflowCoverView *cover = [self.dataSource coverflowView:self coverAtIndex:index];
+		TKCoverflowCoverView *cover = [self.dataSource coverflowView:self coverAtIndex:(int)index];
 		cover.transform = CGAffineTransformIdentity;
 		[coverViews replaceObjectAtIndex:index withObject:cover];
 		
@@ -219,9 +219,11 @@
 #pragma mark Manage Range and Animations
 - (void) newrange{
 	
-	int loc = deck.location, len = deck.length, buff = coverBuffer;
-	int newLocation = currentIndex - buff < 0 ? 0 : currentIndex-buff;
-	int newLength = currentIndex + buff > _numberOfCovers ? _numberOfCovers - newLocation : currentIndex + buff - newLocation;
+	int loc = (int)deck.location;
+	int len = (int)deck.length;
+	int buff = (int)coverBuffer;
+	int newLocation = (int)currentIndex - buff < 0 ? 0 : (int)currentIndex-buff;
+	int newLength = (int)currentIndex + buff > _numberOfCovers ? _numberOfCovers - newLocation : (int)currentIndex + buff - newLocation;
 	
 	if(loc == newLocation && newLength == len) return;
 	
@@ -240,7 +242,7 @@
 }
 - (void) adjustViewHeirarchy{
 	
-	int i = currentIndex-1;
+	NSInteger i = currentIndex-1;
 	if (i >= 0) 
 		for(;i > deck.location;i--) 
 			[self sendSubviewToBack:[coverViews objectAtIndex:i]];
@@ -269,8 +271,8 @@
 	}
 	
 }
-- (void) animateToIndex:(int)index animated:(BOOL)animated{
-	NSString *ID = [NSString stringWithFormat:@"%d",index];
+- (void) animateToIndex:(NSInteger)index animated:(BOOL)animated{
+	NSString *ID = [NSString stringWithFormat:@"%ld",(long)index];
 	//if(velocity>200) animated = NO;
 	
 		
@@ -286,7 +288,7 @@
 	}
 
 	for(UIView *v in views){
-		int i = [coverViews indexOfObject:v];
+		NSInteger i = [coverViews indexOfObject:v];
 		if(i < index) v.layer.transform = leftTransform;
 		else if(i > index) v.layer.transform = rightTransform;
 		else v.layer.transform = CATransform3DIdentity;
@@ -331,7 +333,7 @@
 		v.frame = r;
 	}
 	
-	for(int i= deck.location; i < deck.location + deck.length; i++){
+	for(NSInteger i= deck.location; i < deck.location + deck.length; i++){
 		if([coverViews objectAtIndex:i] != [NSNull null]){
 			UIView *cover = [coverViews objectAtIndex:i];
 			CGRect r = cover.frame;
@@ -368,7 +370,7 @@
 
 - (void) layoutSubviews{
 	
-	velocity = abs(pos-self.contentOffset.x);
+	velocity = fabs(pos-self.contentOffset.x);
 	movingRight = self.contentOffset.x - pos > 0 ? YES : NO;
 	pos = self.contentOffset.x;
 
@@ -413,7 +415,7 @@
 	return nil;
 }
 
-- (void) bringCoverAtIndexToFront:(int)index animated:(BOOL)animated{
+- (void) bringCoverAtIndexToFront:(NSInteger)index animated:(BOOL)animated{
 	if(index == currentIndex) return;
 	
     currentIndex = index;
@@ -454,7 +456,7 @@
 				[self.coverflowDelegate coverflowView:self coverAtIndexWasTappedInFront:currentIndex tapCount:touch.tapCount];
 			
 		}else{
-			int index = [coverViews indexOfObject:currentTouch];
+			NSInteger index = [coverViews indexOfObject:currentTouch];
 			[self setContentOffset:CGPointMake(_coverSpacing*index, 0) animated:YES];
 		}
 	}

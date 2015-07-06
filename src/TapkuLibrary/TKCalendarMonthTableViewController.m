@@ -35,6 +35,9 @@
 @synthesize tableView = _tableView;
 
 - (void) viewDidUnload {
+	
+	[super viewDidUnload];
+	
 	self.tableView.delegate = nil;
 	self.tableView.dataSource = nil;
 	self.tableView = nil;

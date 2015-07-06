@@ -108,6 +108,8 @@
 
 - (void) viewDidUnload
 {
+	[super viewDidUnload];
+	
     self.navigationItem.leftBarButtonItem = nil;
     
 	self.monthView = nil;

@@ -61,7 +61,7 @@
 - (id) initWithMonth:(NSDate*)date marks:(NSArray*)marks startDayOnSunday:(BOOL)sunday;
 - (void) setTarget:(id)target action:(SEL)action;
 
-- (void) selectDay:(int)day;
+- (void) selectDay:(NSInteger)day;
 - (NSDate*) dateSelected;
 
 + (NSArray*) rangeOfDatesInMonthGrid:(NSDate*)date startOnSunday:(BOOL)sunday;
@@ -270,10 +270,10 @@
 }
 
 
-- (CGRect) rectForCellAtIndex:(int)index{
+- (CGRect) rectForCellAtIndex:(NSInteger)index{
 	
-	int row = index / 7;
-	int col = index % 7;
+	NSInteger row = index / 7;
+	NSInteger col = index % 7;
 	
 	return CGRectMake(col*46, row*44+6, 47, 45);
 }
@@ -309,8 +309,8 @@
 	CGContextDrawTiledImage(context, r, tile.CGImage);
 	
 	if(today > 0){
-		int pre = firstOfPrev > 0 ? lastOfPrev - firstOfPrev + 1 : 0;
-		int index = today +  pre-1;
+		NSInteger pre = firstOfPrev > 0 ? lastOfPrev - firstOfPrev + 1 : 0;
+		NSInteger index = today +  pre-1;
 		CGRect r =[self rectForCellAtIndex:index];
 		r.origin.y -= 7;
 		[[UIImage imageWithContentsOfFile:TKBUNDLE(@"TapkuLibrary.bundle/Images/calendar/Month Calendar Today Tile.png")] drawInRect:r];
@@ -324,7 +324,7 @@
 	
 	if(firstOfPrev>0){
 		[color set];
-		for(int i = firstOfPrev;i<= lastOfPrev;i++){
+		for(int i = (int)firstOfPrev;i<= lastOfPrev;i++){
 			r = [self rectForCellAtIndex:index];
 			if ([marks count] > 0)
 				[self drawTileInRect:r day:i mark:[[marks objectAtIndex:index] boolValue] font:font font2:font2];
@@ -365,13 +365,13 @@
 	
 }
 
-- (void) selectDay:(int)day{
+- (void) selectDay:(NSInteger)day{
 	
-	int pre = firstOfPrev < 0 ?  0 : lastOfPrev - firstOfPrev + 1;
+	NSInteger pre = firstOfPrev < 0 ?  0 : lastOfPrev - firstOfPrev + 1;
 	
-	int tot = day + pre;
-	int row = tot / 7;
-	int column = (tot % 7)-1;
+	NSInteger tot = day + pre;
+	NSInteger row = tot / 7;
+	NSInteger column = (tot % 7)-1;
 	
 	selectedDay = day;
 	selectedPortion = 1;
@@ -396,7 +396,7 @@
 	
 	
 	[self addSubview:self.selectedImageView];
-	self.currentDay.text = [NSString stringWithFormat:@"%d",day];
+	self.currentDay.text = [NSString stringWithFormat:@"%ld",(long)day];
 	
 	if ([marks count] > 0) {
 		

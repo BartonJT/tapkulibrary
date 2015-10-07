@@ -380,7 +380,7 @@
 	
 	NSMutableArray *ar = [NSMutableArray arrayWithCapacity:files.count];
     
-	for(NSObject *obj in files)
+	for (int i = 0; i < [files count]; i++)
     {
 		[ar addObject:[NSNull null]];
     }

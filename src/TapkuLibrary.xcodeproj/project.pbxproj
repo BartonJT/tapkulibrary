@@ -741,7 +741,8 @@
 		0867D690FE84028FC02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0640;
+				LastTestingUpgradeCheck = 0700;
+				LastUpgradeCheck = 0700;
 			};
 			buildConfigurationList = 1DEB922208733DC00010E9CD /* Build configuration list for PBXProject "TapkuLibrary" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -907,6 +908,7 @@
 		1DEB922308733DC00010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -969,6 +971,7 @@
 					"-framework",
 					UIKit,
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.yourcompany.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = LogicTests;
 				SDKROOT = iphoneos;
 				WRAPPER_EXTENSION = octest;
@@ -998,6 +1001,7 @@
 					"-framework",
 					UIKit,
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.yourcompany.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = LogicTests;
 				SDKROOT = iphoneos;
 				WRAPPER_EXTENSION = octest;
@@ -1067,6 +1071,7 @@
 					"-framework",
 					UIKit,
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.yourcompany.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = LogicTests;
 				SDKROOT = iphoneos;
 				WRAPPER_EXTENSION = octest;

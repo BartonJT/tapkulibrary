@@ -158,7 +158,7 @@
 		if (self.location) {
 			locationRect.origin.y += titleSize.height;
 			locationRect.size.height -= titleSize.height;
-			UILineBreakMode breaking = (locationRect.size.height < FONT_SIZE + VERTICAL_OFFSET ? NSLineBreakByTruncatingTail : NSLineBreakByWordWrapping);
+			NSLineBreakMode breaking = (locationRect.size.height < FONT_SIZE + VERTICAL_OFFSET ? NSLineBreakByTruncatingTail : NSLineBreakByWordWrapping);
 			[self.location drawInRect:CGRectIntegral(locationRect) 
 						  withFont:[UIFont systemFontOfSize:FONT_SIZE] 
 					 lineBreakMode:breaking

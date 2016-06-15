@@ -29,12 +29,12 @@
  
  */
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 #import "UIView+TKCategory.h"
 
-@interface UIViewTests : SenTestCase
+@interface UIViewTests : XCTestCase
 
 @end

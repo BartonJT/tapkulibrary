@@ -29,10 +29,10 @@
  
  */
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 #import <Foundation/Foundation.h>
 #import "NSString+TKCategory.h"
 
-@interface NSStringTests : SenTestCase
+@interface NSStringTests : XCTestCase
 
 @end

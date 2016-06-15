@@ -31,14 +31,14 @@
 
 
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
 #import "NSDate+TKCategory.h"
 
 
-@interface FoundationTests : SenTestCase 
+@interface FoundationTests : XCTestCase 
 
 - (void) testDateCategory;
 

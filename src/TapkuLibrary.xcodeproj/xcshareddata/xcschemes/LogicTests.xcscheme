@@ -17,9 +17,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "3B45DDF0134C736600D24C1A"
-               BuildableName = "LogicTests.octest"
+               BuildableName = "LogicTests.xctest"
                BlueprintName = "LogicTests"
-               ReferencedContainer = "container:TapkuLibrary.xcodeproj">
+               ReferencedContainer = "container:../../TapkuLibrary/src/TapkuLibrary.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>

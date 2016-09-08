@@ -68,6 +68,7 @@
     return self;
 }
 - (void) awakeFromNib{
+	[super awakeFromNib];
     [self _load];
 }
 
